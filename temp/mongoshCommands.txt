@@ -1,0 +1,7 @@
+//use users
+
+
+db.properties.updateMany(
+  {    verified:true},
+  $set:{verified:false}
+  )

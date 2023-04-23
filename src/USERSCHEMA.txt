@@ -1,0 +1,41 @@
+{
+    "Wallet": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "aadhar_no": "540789891548",
+    "name": "Jaison Varghese",
+    "dob": "12/16/1978",
+    "address": {
+       "localilty": "Kartikulam - Kurakkanmoola Rd, Kurukkanmoola,Wayanad",
+       "State": "Kerala",
+       "pincode": "670646"
+    },
+    "gender": "male",
+    "property_owner": "true"
+ }
+ ,
+{
+    "Wallet": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "aadhar_no": "640789891548",
+    "name": "Michael Anjootti",
+    "dob": "12/16/1968",
+    "address": {
+       "localilty": "Anjooti house - near water tank, Mattancherry,Ernakulam",
+       "State": "Kerala",
+       "pincode": "682002"
+    },
+    "gender": "male",
+    "property_owner": "true"
+  },
+ {
+    "Wallet": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+    "aadhar_no": "740789891548",
+    "name": "Joshi S",
+    "dob": "12/16/1988",
+    "address": {
+       "localilty": "Puthenpureykal house,Thaikkattukara, Choornikkara, Aluva,Ernakulam",
+       "State": "Kerala",
+       "pincode": "683563"
+    },
+    "gender": "male",
+    "property_owner": "false"
+ }
+

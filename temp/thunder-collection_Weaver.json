@@ -1,0 +1,91 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Weaver",
+    "dateExported": "2023-04-10T17:14:04.428Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "838fb62a-c787-4853-9ce7-2908ff7a4973",
+            "colId": "9b2b6afb-6a02-40d3-ad12-8c4709179ec7",
+            "containerId": "",
+            "name": "does user exist",
+            "url": "localhost:5000/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-04-09T06:19:58.726Z",
+            "modified": "2023-04-09T09:18:11.731Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"aadhar_no\": \"64079891548\"}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "081c5d6c-b080-4079-9125-e13eb8c1ec77",
+            "colId": "9b2b6afb-6a02-40d3-ad12-8c4709179ec7",
+            "containerId": "",
+            "name": "saving property details",
+            "url": "localhost:5000",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-04-10T16:31:26.902Z",
+            "modified": "2023-04-10T17:13:20.013Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "address",
+                        "value": "newyork"
+                    },
+                    {
+                        "name": "description",
+                        "value": "ghsegeg"
+                    },
+                    {
+                        "name": "price",
+                        "value": "20"
+                    },
+                    {
+                        "name": "area",
+                        "value": "3000"
+                    },
+                    {
+                        "name": "coordinates[latitude]",
+                        "value": "42.3601"
+                    },
+                    {
+                        "name": "pincode",
+                        "value": "766555"
+                    },
+                    {
+                        "name": "state",
+                        "value": "imagine"
+                    },
+                    {
+                        "name": "coordinates[longitude]",
+                        "value": "-71.0589"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "testImage",
+                        "value": "/home/friday/longitude-and-latitude-simple.png"
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ]
+}
