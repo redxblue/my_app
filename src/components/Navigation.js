@@ -24,8 +24,9 @@ const Navigation = ({ account, setAccount,formData,setFormData}) => {
                 {account== landInspector &&
                     <li><Link to="/landinspector">Land Inspector</Link></li>
                     }
+                {    account!= landInspector &&
                 <li><Link to="/userdashboard">User Dashboard</Link></li>
-                
+                }
 
             </ul>
 
