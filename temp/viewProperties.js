@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-function ViewProperties({propertyNft,properties}) { //properties contains an array of metadata of nfts (NOT token URIs)
+function ViewProperties({propertyNft,properties,loadBlockchainData}) { //properties contains an array of metadata of nfts (NOT token URIs)
   //console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
-  //console.log(properties)
+  console.log(properties)
   const [tempData, setTempData] = useState([]);
   const fetchData=async()=>{
     const response=await fetch("https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB")
@@ -15,7 +15,7 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
   
   const [data, setData] = useState([]);
   useEffect(() => {
-    
+    loadBlockchainData()
     axios
       .get("http://localhost:5000/viewproperties")
       .then((res) => setData(res.data))
@@ -26,7 +26,7 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
       <h2>Homes near you</h2>
       <div className="row ">
         {console.log(data)}
-       {data.map((obj) => {
+       {properties.map((obj) => {
         
           //console.log(base64String)
           return (
@@ -39,13 +39,13 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
                   <p className="card-text" style={{fontSize:"13px",fontWeight:"600"}}>
                     {obj.description}
                     <strong>{obj.facilities.beds}</strong> bds |
-                        <strong>{hobj.facilities.bathrooms}</strong> ba |
+                        <strong>{obj.facilities.bathrooms}</strong> ba |
                         <strong>{obj.price}</strong> ETH
                   </p>
                 
                   
                   <a href="#" className="btn btn-primary">
-                  View more details
+                  Rent
                   </a>
                   </div>
                   </div>

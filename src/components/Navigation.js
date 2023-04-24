@@ -4,6 +4,7 @@ import newlogo from '../assets/newlogo.png'
 import {
     Link
   } from "react-router-dom";
+  const landInspector="0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc"
 ////////////////////////propertyOwner state is passed here//////
 const Navigation = ({ account, setAccount,formData,setFormData}) => { 
     const connectHandler = async () => {
@@ -16,9 +17,13 @@ const Navigation = ({ account, setAccount,formData,setFormData}) => {
         <nav>
             <ul className='nav__links'>
                 <li><Link to="/register" >Register</Link></li> {/*onClick={() => {window.location.href="/register"}} */}
-                <li><Link to="/listproperty">List property</Link></li>
+                {account == ("0x70997970C51812dc3A010C7d01b50e0d17dc79C8" ||"0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC")&&
+                    <li><Link to="/listproperty">List property</Link></li>}
                 <li><Link to="/viewproperties">view properties</Link></li>
-                <li><Link to="/landinspector">Land Inspector</Link></li>
+              
+                {account== landInspector &&
+                    <li><Link to="/landinspector">Land Inspector</Link></li>
+                    }
                 <li><Link to="/userdashboard">User Dashboard</Link></li>
                 
 

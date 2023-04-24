@@ -145,7 +145,7 @@ const [properties,setProperties]=useState([])
         <ListProperty />
         </Route>
         <Route exact path= "/viewproperties">
-        <ViewProperties propertyNft={propertyNft} properties={properties} />
+        <ViewProperties propertyNft={propertyNft} properties={properties} loadBlockchainData={loadBlockchainData} />
         </Route>
         <Route exact path= "/landinspector">
         <LandInspector />

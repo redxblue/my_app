@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import {
+  Link
+} from "react-router-dom";
 
 function ViewProperties({propertyNft,properties}) { //properties contains an array of metadata of nfts (NOT token URIs)
   console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
@@ -44,9 +47,10 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
                         <strong>{obj.facilities.bathrooms}</strong> bathrooms |
                         <strong>{obj.price}</strong> ETH
                     </p>
-                  <a href="#" className="btn btn-primary">
-                  View more details
-                  </a>
+                  
+                  
+                  
+                  <button className="btn btn-primary" onClick={()=>alert("Request for renting has been sent")}>Rent</button>
                   </div>
                   </div>
               </div>

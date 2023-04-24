@@ -12,12 +12,13 @@ function VerifiedRequests({propertyNft,provider}){
  // console.log(MONGODB_URI)
  const propertyNftcontract=propertyNft
 const owner="0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+const [data, setData] = useState([]);
 useEffect(()=>{ 
     getVerifiedRequest()
     
 },[])
 //console.log(propertyNftcontract.address)
-const [data, setData] = useState([]);
+
 const [metaData, setMetaData] = useState("");
 const getVerifiedRequest=async()=>{
     const response = await fetch("http://localhost:5000/userdashboard", {
@@ -63,7 +64,7 @@ const publishProperty=async(obj)=>{
     console.log(tokenId)
     //const totalSupply= await propertyNftcontract.totalSupply()
     if(mintConfirmation){
-      alert(`your property has been minted to the blockchain with token ID${tokenId}`)
+      alert(`your property has been minted to the blockchain with token ID ${tokenId}`)
     }
      
     // mintConfirmation.on('receipt', function(receipt){ //catching transfer event emitted by _mint function
@@ -83,7 +84,7 @@ const publishProperty=async(obj)=>{
         return (
           
           
-           <div className="col">
+           <div className="col" key={obj._id}>
             <div className="card"  style={{ width: "18rem" }}>
                 <img className="card-img-top" src={obj.img} alt="Card cap" />
                 <div className="card-body">

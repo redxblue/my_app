@@ -3,9 +3,9 @@ import {React,useEffect,useState} from 'react'  //0xf39Fd6e51aad88F6F4ce6aB88272
 function LandInspector() {
 useEffect(()=>{
 getPendingRequests();
-});
+},[]);
 const [data, setData] = useState([]);
-
+const [authenticated,setAuthenticated]=useState(false)
 const getPendingRequests=async()=>{
 const response = await fetch("http://localhost:5000/landinspector", {
       method: 'GET',    
@@ -24,6 +24,8 @@ const authenticateListing=async(id)=>{
   });
   const json = await response.json()
   console.log(json)
+  getPendingRequests();
+  
 }
     
   return (
