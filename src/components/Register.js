@@ -91,9 +91,10 @@ function Register() {
     <div>
  {/*//////////////////////////////aadhar check form/////////////// */}
 <form>
-  <div className="mx-auto w-50" >                              
-      <label htmlFor="exampleInputEmail1" className="form-label">
-      Aadhar number
+<h2 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}></h2>
+  <div className="mx-auto w-50" style={{textAlign: "center" ,margin:"50px"}} >                              
+      <label htmlFor="exampleInputEmail1" className="form-label" style={{ fontSize:"45px",color:"#1750AC"}}>
+      Aadhaar number
     </label>
     <input
       type="number" name="aadhar_no"value={formData.aadhar_no} onChange={handleOnChange} required="required"

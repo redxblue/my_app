@@ -81,7 +81,7 @@ router.post('/landinspector', async(req, res)=>{
 router.post('/userdashboard', async(req, res)=>{
     const {owner}=req.body
     try{
-        const verifiedRequests=await Property.find({owner:req.body.owner,verified:true})
+        const verifiedRequests=await Property.find({verified:true})//{owner:req.body.owner,verified:true}
         if(verifiedRequests){
 
             return res.status(200).json(verifiedRequests);

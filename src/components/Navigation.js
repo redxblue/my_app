@@ -18,8 +18,8 @@ const Navigation = ({ account, setAccount,formData,setFormData}) => {
             <ul className='nav__links'>
                 <li><Link to="/register" >Register</Link></li> {/*onClick={() => {window.location.href="/register"}} */}
                 {account == ("0x70997970C51812dc3A010C7d01b50e0d17dc79C8" ||"0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC")&&
-                    <li><Link to="/listproperty">List property</Link></li>}
-                <li><Link to="/viewproperties">view properties</Link></li>
+                    <li><Link to="/listproperty">List Property</Link></li>}
+                <li><Link to="/viewproperties">View Properties</Link></li>
               
                 {account== landInspector &&
                     <li><Link to="/landinspector">Land Inspector</Link></li>

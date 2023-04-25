@@ -110,7 +110,7 @@ const [properties,setProperties]=useState([])
             
 <div className='cards__section'>
 
-<h3>Homes For You</h3>
+
 
 <hr />
 
@@ -161,3 +161,5 @@ const [properties,setProperties]=useState([])
 }
 
 export default App;
+
+//<h3 style={{backgroundColor: "#1750AC", color:"white",padding: "10px",}}>Homes For You</h3>

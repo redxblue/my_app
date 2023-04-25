@@ -26,7 +26,7 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
   },[]);
   return (
     <div className="" >
-      <h2>Homes near you</h2>
+      <h2 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>Homes near you</h2>
       <div className="row ">
         {console.log(data)}
        {properties.map((obj) => {
@@ -35,7 +35,7 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
           return (
             
              <div className="col">
-              <div className="card" style={{ width: "18rem" }}>
+              <div className="card" style={{ width: "" ,height:"100vh"}}>
                   <img className="card-img-top" src={obj.image} alt="Card image cap" />
                   <div className="card-body">
                   <h5 className="card-title">{obj.address}</h5>           {/*`Price:${obj.price}` */}

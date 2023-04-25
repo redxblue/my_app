@@ -35,14 +35,21 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  place-items: center;
 
   padding: 20px;
 }
 
 .nav__brand img {
-  max-width: 125px;
+  max-width: 159px;
   height: auto;
 }
+
+
+
+
+
 
 .nav__brand h1 {
   color: var(--clr-blue);
@@ -129,7 +136,7 @@ header {
   min-width: 40%;
 
   position: absolute;
-  top: 45%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

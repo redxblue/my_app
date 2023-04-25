@@ -30,14 +30,14 @@ const authenticateListing=async(id)=>{
     
   return (
     <div className='row'>
-      <h1>Welcome Mr.LandInspector</h1>
-      <h2>Requests awaiting verification...</h2>
+      <h1 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>Welcome Mr.LandInspector</h1>
+      <h2 style={{backgroundColor: "grey", color:"white",padding: "10px",fontSize:"15px"}}>Requests awaiting verification...</h2>
       {data.map((obj) => {
         return (
           
           
            <div className="col">
-            <div className="card"  style={{ width: "18rem" }}>
+            <div className="card"  style={{ width: "",height:"100vh" }}>
                 <img className="card-img-top" src={obj.img} alt="Card cap" />
                 <div className="card-body">
                 <h5 className="card-title">{obj.address}</h5>           {/*`Price:${obj.price}` */}

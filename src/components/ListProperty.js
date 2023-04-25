@@ -74,6 +74,9 @@ const[filedata,setFileData]=useState(null)
         })
     });
     const json = await response.json()
+    if(response.status ==200){
+      alert("Property  has been submitted for verification")
+    }
     if(json.error){
       alert("Property already exists")
     }
@@ -136,10 +139,10 @@ const[filedata,setFileData]=useState(null)
   };
   return (
     <div className="row my-10" style={{margin:"12px"}}>
-      <h3>List your property</h3>
+      <h3 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>List your property</h3>
       <form action="/listproperty"method="POST" encType="multipart/form-data"> 
-        <div className="form-row ">
-          <div className="col-md-4 mb-3">
+        <div className="row ">
+          <div className="col-md-4 mb-3 w-50">
             <label htmlFor="validationDefault02">Address</label>
             <input
               type="text"
@@ -195,7 +198,7 @@ const[filedata,setFileData]=useState(null)
               required=""
             />
           </div>
-          <div className="col-md-4 mb-3">
+          <div className="col-md-4 mb-3 w-50">
             <label htmlFor="validationDefault01">Description</label>
             <textarea
               className="form-control"
@@ -208,8 +211,8 @@ const[filedata,setFileData]=useState(null)
             />
           </div>
         </div>
-        <div className="form-row w-25">
-          <div className="col-md-6 mb-3 ">
+        <div className="row ">
+          <div className="col-md-6 mb-3 w-25">
             <label htmlFor="validationDefault03">City</label>
             <input
               type="text"
@@ -224,7 +227,7 @@ const[filedata,setFileData]=useState(null)
           </div>
          
 
-          <div className="col-md-3 mb-3">
+          <div className="col-md-3 mb-3 w-25">
             <label htmlFor="validationDefault04">State</label>
             <input
               type="text"
@@ -251,11 +254,15 @@ const[filedata,setFileData]=useState(null)
             />
           </div>
         </div>
-        <FileUploaded  onFileSelect={(file) => setFileData(file)}></FileUploaded>
-        
-      
 
-        <button className="btn btn-primary" type="submit" onClick={handleOnSubmit}>
+        <div className="col-md-3 mb-3 w-50" style={{margin:"25px"}} >
+        <FileUploaded  onFileSelect={(file) => setFileData(file)}></FileUploaded>
+        </div>
+      <h1></h1>
+
+
+
+        <button className="btn btn-primary"  style={{margin:"25px"}} type="submit" onClick={handleOnSubmit}>
           Submit for verification 
         </button>
       </form>
