@@ -16,6 +16,9 @@ const propertyList = new mongoose.Schema({
     price:{
         type:String       //may want to include security deposit amount here
     },
+    securityDeposit:{
+        type:String
+    },
     area:{
         type:String
     },
@@ -35,7 +38,12 @@ const propertyList = new mongoose.Schema({
     verified:{
         type:Boolean,
         default:false
-    }
+    },
+    minted:{
+        type:Boolean,
+        default:false
+    },
+    
 
 })
 let Properties =mongoose.model("properties", propertyList);

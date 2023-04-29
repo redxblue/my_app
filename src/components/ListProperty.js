@@ -29,6 +29,7 @@ const[filedata,setFileData]=useState(null)
   const [formData, setFormData] =useState({
     address: "",
     price:"",
+    securityDeposit:"",
     description:"",
     city:"",
     beds:"",
@@ -63,6 +64,7 @@ const[filedata,setFileData]=useState(null)
         },
         body: JSON.stringify({address:formData.address,
           price:formData.price,
+          securityDeposit:formData.securityDeposit,
           description:formData.description,
           img:base64Code,
           city:formData.city,
@@ -82,59 +84,6 @@ const[filedata,setFileData]=useState(null)
     }
 
     });
-
-
-
-    // const data = new FormData();
-    // data.append("address", formData.address);
-    // data.append("price", formData.price);
-    // data.append("description", formData.description);
-    // data.append("city", formData.city);
-    // data.append("facilities[beds]", formData.beds);
-    // data.append("facilities[bathrooms]", formData.bathrooms);
-    // data.append("state", formData.state);
-    // data.append("zip", formData.zip);
-    // data.append("testImage", filedata); 
-    // console.log(filedata)
-    
-
-
-  //   fetch("http://localhost:5000/listproperty", {
-  //     body: data,
-  //     headers: {
-           
-  //     },
-  //     method: "post",
-  // }).then((response) => {
-  //   console.log(JSON.stringify(response.data));
-  //   })
-  //   .catch((error) => {
-  //     console.error(error.response.data);
-  //   });
-  //   console.log(data)
-
-
-
-    // let config = {
-    //   method: 'post',
-    //   maxBodyLength: Infinity,
-    //   url: 'http://localhost:5000/listproperty',
-    //   headers: { 
-    //     'Accept': '*/*', 
-    //     'Content-Type': 'multipart/form-data'
-    //   },
-    //   data : data
-    // };
-     
-    // axios.request(config)
-    // .then((response) => {
-    // console.log(JSON.stringify(response.data));
-    // })
-    // .catch((error) => {
-    //   console.error(error.response.data);
-    // });
-    // console.log(data)
-
 
   };
   return (
@@ -165,7 +114,21 @@ const[filedata,setFileData]=useState(null)
               onChange={handleOnChange}
               id="validationDefault02"
               name="price"
-              placeholder="Price in Ether"
+              placeholder="Rent amount in Ether"
+              defaultValue=""
+              required=""
+            />
+          </div>
+          <div className="col-md-4 mb-3 w-25">
+            <label htmlFor="validationDefault02">Security Deposit</label>
+            <input
+              type="number"
+              className="form-control"
+              value={formData.securityDeposit}
+              onChange={handleOnChange}
+              id="validationDefault02"
+              name="securityDeposit"
+              placeholder="Security Deposit in Ether"
               defaultValue=""
               required=""
             />

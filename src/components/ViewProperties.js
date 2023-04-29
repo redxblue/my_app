@@ -8,17 +8,17 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
   console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
   console.log(properties)
   const [tempData, setTempData] = useState([]);
-  const fetchData=async()=>{
-    const response=await fetch("https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB")
-    const res=await response.json()
-    setTempData([res]) //transforming it to an array to use map fn //for ease of replacing 
-    console.log(tempData)
-  }
+  // const fetchData=async()=>{
+  //   const response=await fetch("https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB")
+  //   const res=await response.json()
+  //   setTempData([res]) //transforming it to an array to use map fn //for ease of replacing 
+  //   console.log(tempData)
+  // }
   //fetchData();
   
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetchData();
+    //fetchData();
     axios
       .get("http://localhost:5000/viewproperties")
       .then((res) => setData(res.data))

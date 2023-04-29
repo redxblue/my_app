@@ -32,14 +32,14 @@ router.post('/register', async(req, res)=>{
     //////////////////////////////////////////Route #2--List Property---//////////////////////////////////////////
 
     router.post('/listproperty', async(req, res)=>{
-        const {address,img,description,price,area,pincode,state }=req.body
+        const {address,img,description,price,securityDeposit,area,pincode,state }=req.body
         try{
             const propertyExists= await Property.findOne({address});
             if(propertyExists){
                 return res.status(422).json({error:"Property already exists"});
             }
             else{
-                const newProperty =new Property({address,img,description,price,area,facilities:{
+                const newProperty =new Property({address,img,description,price,securityDeposit,area,facilities:{
                     beds:req.body.facilities.beds,
                     bathrooms:req.body.facilities.bathrooms
                   },pincode,state })
@@ -81,7 +81,7 @@ router.post('/landinspector', async(req, res)=>{
 router.post('/userdashboard', async(req, res)=>{
     const {owner}=req.body
     try{
-        const verifiedRequests=await Property.find({verified:true})//{owner:req.body.owner,verified:true}
+        const verifiedRequests=await Property.find({owner:owner,minted:false,verified:true})//{owner:req.body.owner,verified:true}
         if(verifiedRequests){
 
             return res.status(200).json(verifiedRequests);
@@ -118,7 +118,7 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
            
            const options = {
                pinataMetadata: {
-                   name: "MyCustomName3",
+                   name: propToBePublished[0].address, //optional just for ease of recognition
                    keyvalues: {
                        customKey: 'customValue',
                        customKey: d.toString(),
@@ -147,12 +147,13 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
            const body = {
                owner:propToBePublished[0].owner,
                address: propToBePublished[0].address,
+               price: propToBePublished[0].price,
+               securityDeposit: propToBePublished[0].securityDeposit,
                image:imageUrl,
                facilities:{ beds:3,
                             bathrooms:4
                },
                description:propToBePublished[0].description,
-               price: propToBePublished[0].price,
                pincode:propToBePublished[0].pincode,
                state:propToBePublished[0].state
            };
@@ -171,6 +172,9 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
            } //113 line pinIpfs async function
            const metaData=await pinToIpfs();
            console.log(metaData)
+           if(metaData){
+            await Property.updateOne({_id:req.body.id},{$set:{minted:true}}) //error handling required? 
+           }
          return res.status(200).json(metaData); 
         }
         else{
