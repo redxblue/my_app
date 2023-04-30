@@ -35,22 +35,26 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
           return (
             
              <div className="col">
-              <div className="card" style={{ width: "" ,height:"100vh"}}>
+              <div className="card" style={{ width: "" ,height:"94vh"}}>
                   <img className="card-img-top" src={obj.image} alt="Card image cap" />
                   <div className="card-body">
-                  <h5 className="card-title">{obj.address}</h5>           {/*`Price:${obj.price}` */}
-                  <p className="card-text" style={{fontSize:"13px",fontWeight:"600"}}>
-                    {obj.description}
+                  <strong className='card-text'>  {obj.price} ETH </strong>
+                  <p className='card-text'> <strong>{obj.facilities.beds}</strong> beds |
+                  <strong>{obj.facilities.bathrooms} </strong>bathrooms 
                   </p>
-                  <p>
-                        <strong>{obj.facilities.beds}</strong> beds |
-                        <strong>{obj.facilities.bathrooms}</strong> bathrooms |
-                        <strong>{obj.price}</strong> ETH
-                    </p>
+               
+                  <p className="card-text" style={{fontWeight:"400"}}>{obj.address}</p>           {/*`Price:${obj.price}` */}
+                <p></p>
+                <p className="card-title" style={{fontSize:"15px",fontWeight:"400"}}>
+                  {obj.description}
+                  </p>
+               
                   
                   
-                  
+                  <div class=" text-center" >
+
                   <button className="btn btn-primary" onClick={()=>alert("Request for renting has been sent")}>Rent</button>
+                  </div>
                   </div>
                   </div>
               </div>

@@ -88,18 +88,23 @@ const publishProperty=async(obj)=>{
           
           
            <div className="col" key={obj._id}>
-            <div className="card"  style={{ width: "",height:"100vh" }}>
+            <div className="card"  style={{ width: "",height:"94vh" }}>
                 <img className="card-img-top" src={obj.img} alt="Card cap" />
                 <div className="card-body">
-                <h5 className="card-title">{obj.address}</h5>           {/*`Price:${obj.price}` */}
-                <p className="card-text" style={{fontSize:"13px",fontWeight:"600"}}>
+                <strong className='card-text'>  {obj.price} ETH </strong>
+                  <p className='card-text'> <strong>{obj.facilities.beds}</strong> beds |
+                  <strong>{obj.facilities.bathrooms} </strong>bathrooms 
+                  </p>
+               
+                  <p className="card-text" style={{fontWeight:"400"}}>{obj.address}</p>           {/*`Price:${obj.price}` */}
+                <p></p>
+                <p className="card-title" style={{fontSize:"15px",fontWeight:"400"}}>
                   {obj.description}
-                </p>
-                <a href="#" className="btn btn-primary">
-                View more details
-                </a>
-                
+                  </p>
+               
+                  <div class=" text-center" >
                 <button type="button" key={obj._id}className="btn btn-success my-3" onClick={()=>publishProperty(obj)}>Publish to Blockchain</button>
+                </div>
                 </div>
                 </div>
             </div>
