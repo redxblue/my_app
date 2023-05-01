@@ -1,10 +1,11 @@
 import axios from "axios";
+import { ethers } from 'ethers';
 import { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
 
-function ViewProperties({propertyNft,properties}) { //properties contains an array of metadata of nfts (NOT token URIs)
+function ViewProperties({propertyNft,properties,provider}) { //properties contains an array of metadata of nfts (NOT token URIs)
   console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
   console.log(properties)
   const [tempData, setTempData] = useState([]);
@@ -24,7 +25,20 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
       .then((res) => setData(res.data))
       .catch((err) => console.log(err, "it has an error"));
   },[]);
-  return (
+  const rentProperty=async(obj)=>{
+    console.log(obj)
+    console.log(obj.tokenid)
+    const signer = provider.getSigner();
+    console.log(signer)
+    const Amount= Number(obj.price)+Number(obj.securityDeposit) //typeof(Amount) is Number
+    const tx= await propertyNft.connect(signer).rent(obj.tokenid,{value: ethers.utils.parseUnits(`${Amount}`)}) //{value: ethers.utils.parseEther(obj.price)}
+    //securityDeposit and rentAmount are strings in ether unit stored in wei representation in the contract //👆valueString,unit
+    //example if securityDeposit==12 then its stored as 12*10^18 wei which is 12 eth ,hence eth unit is used above in parsing
+    console.log(tx)
+    const ftx= await tx.wait();
+    console.log(ftx)
+    }   
+  return ( 
     <div className="" >
       <h2 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>Homes near you</h2>
       <div className="row ">
@@ -53,7 +67,7 @@ function ViewProperties({propertyNft,properties}) { //properties contains an arr
                   
                   <div class=" text-center" >
 
-                  <button className="btn btn-primary" onClick={()=>alert("Request for renting has been sent")}>Rent</button>
+                  <button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>
                   </div>
                   </div>
                   </div>

@@ -58,7 +58,8 @@ const publishProperty=async(obj)=>{
     console.log(symbol)
     const signer = provider.getSigner();
     const creator = await signer.getAddress()
-    const mintConfirmation= await propertyNftcontract.connect(signer).mint(creator,json ) //⭐⭐⭐Minting
+    console.log(obj.securityDeposit)
+    const mintConfirmation= await propertyNftcontract.connect(signer).mint(creator,json,obj.securityDeposit,obj.price ) //⭐⭐⭐Minting
     console.log(mintConfirmation.hash)
     const receipt = await provider.getTransactionReceipt(mintConfirmation.hash);
     const tokenIdHex=receipt.logs[0].topics[3]

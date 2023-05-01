@@ -99,6 +99,10 @@
     "type": "event"
   },
   {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -139,6 +143,19 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "endRent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
       }
@@ -149,6 +166,19 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -189,6 +219,16 @@
         "internalType": "string",
         "name": "_uri",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_securityDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rentAmount",
+        "type": "uint256"
       }
     ],
     "name": "mint",
@@ -248,10 +288,60 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "payRent",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "propertyInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "securityDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rentAmount",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "rent",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -359,6 +449,25 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "tenentOf",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
       }
@@ -422,5 +531,9 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
   }
 ]

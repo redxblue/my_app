@@ -145,7 +145,7 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
            
            
            const body = {
-               owner:propToBePublished[0].owner,
+               owner:propToBePublished[0].owner, //owner of the property
                address: propToBePublished[0].address,
                price: propToBePublished[0].price,
                securityDeposit: propToBePublished[0].securityDeposit,
@@ -169,7 +169,7 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
            const metaData= await pinJSONToIPFS(body); // returns Metadata URI
            //console.log(metaData);
            return metaData
-           } //113 line pinIpfs async function
+        } //113 line pinIpfs async function
            const metaData=await pinToIpfs();
            console.log(metaData)
            if(metaData){

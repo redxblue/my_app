@@ -60,7 +60,9 @@ const [properties,setProperties]=useState([])
       const uri = await propertyNft.tokenURI(i) /////will give error as no nft is minted yet
       const response = await fetch(uri)
       console.log(response)
-      const metadata = await response.json()
+      let metadata = await response.json()
+      metadata={...metadata, tokenid:i} //appending token ID to the URI response //to be used with View Properties to rent
+      console.log(metadata);
       properties1.push(metadata)
     }
     setProperties(properties1)
@@ -145,7 +147,7 @@ const [properties,setProperties]=useState([])
         <ListProperty />
         </Route>
         <Route exact path= "/viewproperties">
-        <ViewProperties propertyNft={propertyNft} properties={properties} loadBlockchainData={loadBlockchainData} />
+        <ViewProperties propertyNft={propertyNft} provider={provider} properties={properties} loadBlockchainData={loadBlockchainData} />
         </Route>
         <Route exact path= "/landinspector">
         <LandInspector />
