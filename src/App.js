@@ -17,13 +17,17 @@ import ListProperty from './components/ListProperty';
 import ViewProperties from './components/ViewProperties';
 import LandInspector from './components/LandInspector';
 import UserDashboard from './components/UserDashboard';
-
+import Transactions from './components/User_Dashboard/Transactions';
+import VerifiedRequests from './components/User_Dashboard/VerifiedRequests';
+import MyProperties from './components/User_Dashboard/MyProperties';
 // ABIs
 //import RealEstate from './abis/RealEstate.json'
 //import Escrow from './abis/Escrow.json'
 import PropertyNft from './abi/PropertyNft.json'
 // Config
 import config from './config.json';
+
+
 
 function App() {
 
@@ -57,7 +61,7 @@ const [properties,setProperties]=useState([])
     const properties1=[];
     for(var i=0;i<totalSupply;++i) ////////Metamsk error of invalid token ID
     {
-      const uri = await propertyNft.tokenURI(i) /////will give error as no nft is minted yet
+      const uri = await propertyNft.tokenURI(i) ///// initially will give error as no nft is minted yet
       const response = await fetch(uri)
       console.log(response)
       let metadata = await response.json()
@@ -155,9 +159,18 @@ const [properties,setProperties]=useState([])
         <Route exact path= "/userdashboard">
         <UserDashboard propertyNft={propertyNft} provider={provider}/>
         </Route>
+        <Route exact path= "/userdashboard/transactions">
+        <Transactions propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
+        </Route>
+        <Route exact path= "/userdashboard/verified_requests">
+        <VerifiedRequests propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
+        </Route>
+        <Route exact path= "/userdashboard/my_properties">
+        <MyProperties propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
+        </Route>
       </Switch>     
      </Router>
-    
+     
     </div>
   );
 }

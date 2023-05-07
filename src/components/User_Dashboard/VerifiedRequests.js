@@ -2,6 +2,8 @@ import {React,useEffect,useState} from 'react'
 import { ethers } from 'ethers';
 import axios from 'axios'
 import { providers } from 'ethers'
+import UserDashboard from '../UserDashboard';
+import './Transactions.css' //////////////////// ⭐⭐CSS IS IMPORTED HERE
 const FormData = require('form-data')
 const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI0MWU2NjYwMS01NDc2LTQwMDYtOTk2ZS02Mjk2NGE5ZDk2YWQiLCJlbWFpbCI6InNoYXJvbmpvYjQxMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiNWE0OTg5NDUzODYzMmI2OGFlNzUiLCJzY29wZWRLZXlTZWNyZXQiOiI0NmY4ZGUxZWVhZGE3OGM1NWQ1NDg1MGI4Njc1NDZhYTI0ODc5NmU0MmY0NWE1MThlM2Y0NzQzZDVhMGJmOGQxIiwiaWF0IjoxNjgyMDg0NDQ3fQ.bb5-y3RmrZkAryeIzn2zIIl_ztej-TOw7pTPT-jz0cw"
 //const fs = require('fs')
@@ -81,9 +83,10 @@ const publishProperty=async(obj)=>{
 
 }
   return (
-    
-      <div className='row'>
-      <h2 style={{backgroundColor: "Grey", color:"white",padding: "5px",fontSize:"15px",margin:"15px"}}>Verified requests</h2>
+    <>
+    <UserDashboard/>
+      <div className='row' style={{marginLeft: "250px"}}>
+      <h2 style={{backgroundColor: "Grey", color:"white",padding: "5px",fontSize:"15px",marginLeft:"0px",textAlign:"center"}}>Verified requests</h2>
       {data.map((obj) => {
         return (
           
@@ -117,7 +120,7 @@ const publishProperty=async(obj)=>{
   })}
 
     </div>
-    
+    </>
   )
 }
 

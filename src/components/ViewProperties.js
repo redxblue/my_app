@@ -8,6 +8,7 @@ import {
 function ViewProperties({propertyNft,properties,provider}) { //properties contains an array of metadata of nfts (NOT token URIs)
   console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
   console.log(properties)
+  const [toggle, setToggle] = useState(true);
   const [tempData, setTempData] = useState([]);
   // const fetchData=async()=>{
   //   const response=await fetch("https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB")
@@ -37,6 +38,7 @@ function ViewProperties({propertyNft,properties,provider}) { //properties contai
     console.log(tx)
     const ftx= await tx.wait();
     console.log(ftx)
+    setToggle(false)
     }   
   return ( 
     <div className="" >
@@ -66,9 +68,7 @@ function ViewProperties({propertyNft,properties,provider}) { //properties contai
                   
                   
                   <div class=" text-center" >
-
-                  <button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>
-                  </div>
+                  { toggle?<button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>:""}     </div>
                   </div>
                   </div>
               </div>
