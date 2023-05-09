@@ -86,7 +86,7 @@ const publishProperty=async(obj)=>{
     <>
     <UserDashboard/>
       <div className='row' style={{marginLeft: "250px"}}>
-      <h2 style={{backgroundColor: "Grey", color:"white",padding: "5px",fontSize:"15px",marginLeft:"0px",textAlign:"center"}}>Verified requests</h2>
+      <h2 style={{backgroundColor: "Grey", color:"white",padding: "5px",fontSize:"25px",marginLeft:"0px",textAlign:"center"}}>Verified requests</h2>
       {data.map((obj) => {
         return (
           

@@ -17,28 +17,10 @@ export const SidebarData = [
     icon: <BsIcons.BsBuildingsFill />,
     cName: 'nav-text'
   },
-  {
-    title: 'Transactions',
-    path: '/userdashboard/transactions',
-    icon: <IoIcons.IoIosPaper />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Team',
-    path: '/team',
-    icon: <IoIcons.IoMdPeople />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Messages',
-    path: '/messages',
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Support',
-    path: '/support',
-    icon: <IoIcons.IoMdHelpCircle />,
-    cName: 'nav-text'
-  }
+  // {
+  //   title: 'Transactions',
+  //   path: '/userdashboard/transactions',
+  //   icon: <IoIcons.IoIosPaper />,
+  //   cName: 'nav-text'
+  // },
 ];

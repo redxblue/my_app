@@ -17,7 +17,7 @@ function UserDashboard({propertyNft,provider}) {
   return (
     <>
    
-    <h1 onClick={show} style={{backgroundColor: "#1750AC", color:"white",padding: "15px", fontsize:"20",cursor: "pointer",margin:"0px",height:"60px"}}>This is user Dashboard</h1>
+    <h1 onClick={show} style={{backgroundColor: "#1750AC", color:"white",padding: "15px", fontsize:"20",cursor: "pointer",margin:"0px",height:"60px"}}>This is User Dashboard</h1>
 
 {/* temp?<VerifiedRequests propertyNft={propertyNft} provider={provider} />:"" */}
    

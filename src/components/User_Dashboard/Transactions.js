@@ -5,7 +5,7 @@ function Transactions() {
   return (<>
     <UserDashboard/>
     <div className='Transactions'>
-    <h4>This is transactions page</h4>
+    <h4 style={{backgroundColor: "Grey", color:"white",padding: "5px",fontSize:"25px",marginLeft:"0px",textAlign:"center"}}> Transaction page</h4>
     </div>
     </>
   )

@@ -68,7 +68,7 @@ function ViewProperties({propertyNft,properties,provider}) { //properties contai
                   
                   
                   <div class=" text-center" >
-                  { toggle?<button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>:""}     </div>
+                  <button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>   </div>
                   </div>
                   </div>
               </div>
