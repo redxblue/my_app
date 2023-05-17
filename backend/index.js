@@ -18,7 +18,7 @@ app.use('/', require('./routes/auth'));
 ////////////////////image retrieve//////////////////////
 app.get('/viewproperties', async(req, res) => {     //viewproperties
   const allData=await Properties.find()
-  console.log(allData)
+  //console.log(allData)
    res.json(allData)
  })
 app.get('/landinspector',async(req,res)=>{

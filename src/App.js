@@ -148,7 +148,7 @@ const [properties,setProperties]=useState([])
         <Register />
         </Route>
         <Route exact path= "/listproperty">
-        <ListProperty />
+        <ListProperty account={account} />
         </Route>
         <Route exact path= "/viewproperties">
         <ViewProperties propertyNft={propertyNft} provider={provider} properties={properties} loadBlockchainData={loadBlockchainData} />
@@ -163,10 +163,10 @@ const [properties,setProperties]=useState([])
         <Transactions propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
         </Route>
         <Route exact path= "/userdashboard/verified_requests">
-        <VerifiedRequests propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
+        <VerifiedRequests propertyNft={propertyNft} provider={provider} account={account}/> { /* no neeed fro prop passing here yet */}
         </Route>
         <Route exact path= "/userdashboard/my_properties">
-        <MyProperties propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
+        <MyProperties propertyNft={propertyNft} provider={provider} loadBlockchainData={loadBlockchainData} account={account}/> { /* no neeed fro prop passing here yet */}
         </Route>
       </Switch>     
      </Router>

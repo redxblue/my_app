@@ -9,7 +9,22 @@ const pinataSDK = require('@pinata/sdk');
 const pinata = new pinataSDK('5a49894538632b68ae75', '46f8de1eeada78c55d54850b867546aa248796e42f45a518e3f4743d5a0bf8d1');
 
 
-
+//////////////////////////////////////////Route #0--checking account type////////////////////////////////
+router.post('/', async(req, res)=>{
+    try {
+        let user = await User.findOne({Wallet:req.body.Wallet}); //checking if user exists
+        if (user) {
+            console.log(user)
+            return res.status(200).json(user.property_owner)
+        }
+        else{
+            return res.status(400).json(null)
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Some Error occured");
+      }
+    })
 
 //////////////////////////////////////////Route #1--Register---//////////////////////////////////////////
 router.post('/register', async(req, res)=>{
@@ -32,7 +47,12 @@ router.post('/register', async(req, res)=>{
     //////////////////////////////////////////Route #2--List Property---//////////////////////////////////////////
 
     router.post('/listproperty', async(req, res)=>{
-        const {address,img,description,price,securityDeposit,area,pincode,state }=req.body
+        const {Wallet,address,img,description,price,securityDeposit,area,pincode,state }=req.body
+        const user=await User.findOne({Wallet})
+        if(user.property_owner!=true){
+            return res.status(401).json({error:"YOU ARE NOT A PROPERTY OWNER"});
+        }
+        else{
         try{
             const propertyExists= await Property.findOne({address});
             if(propertyExists){
@@ -51,7 +71,7 @@ router.post('/register', async(req, res)=>{
             console.log(error);
             res.status(500).send("Some Error occured");
         }
-
+        }
     });
 
 //////////////////////////////////////////Route #3--Land Inspector---//////////////////////////////////////////

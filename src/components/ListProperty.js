@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react'
 import FileUploaded from './FileUploaded'
 //import { use } from '../../backend/routes/auth';
 
-function ListProperty() {
+function ListProperty({account}) {
 
   let base64Code="";
   const getBase64=(file, cb)=>{
@@ -62,7 +62,8 @@ const[filedata,setFileData]=useState(null)
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({address:formData.address,
+        body: JSON.stringify({Wallet:account,
+          address:formData.address,
           price:formData.price,
           securityDeposit:formData.securityDeposit,
           description:formData.description,
@@ -80,7 +81,8 @@ const[filedata,setFileData]=useState(null)
       alert("Property  has been submitted for verification")
     }
     if(json.error){
-      alert("Property already exists")
+      console.log(json.error)
+      alert(json.error)
     }
 
     });

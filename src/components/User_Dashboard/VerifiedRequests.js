@@ -10,15 +10,16 @@ const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQi
 //const pinataSDK = require('@pinata/sdk');
 //const pinata = new pinataSDK('5a49894538632b68ae75', '46f8de1eeada78c55d54850b867546aa248796e42f45a518e3f4743d5a0bf8d1');
 
-function VerifiedRequests({propertyNft,provider}){
+function VerifiedRequests({propertyNft,provider,account}){
  // console.log(MONGODB_URI)
  const propertyNftcontract=propertyNft
-const owner="0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+const owner=account//const owner="0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+console.log(account)
 const [data, setData] = useState([]);
 useEffect(()=>{ 
     getVerifiedRequest()
     
-},[])
+},[account])
 //console.log(propertyNftcontract.address)
 const [metaData, setMetaData] = useState("");
 const getVerifiedRequest=async()=>{ //fetching verified requesrts from database
