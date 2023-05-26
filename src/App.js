@@ -8,6 +8,8 @@ import {
 //import VerifyState from './context/verificationData/verifyState';
 
 
+
+
 // Components
 import Navigation from './components/Navigation';
 import Search from './components/Search';
@@ -20,6 +22,7 @@ import UserDashboard from './components/UserDashboard';
 import Transactions from './components/User_Dashboard/Transactions';
 import VerifiedRequests from './components/User_Dashboard/VerifiedRequests';
 import MyProperties from './components/User_Dashboard/MyProperties';
+import Profile from './components/User_Dashboard/Profile';
 // ABIs
 //import RealEstate from './abis/RealEstate.json'
 //import Escrow from './abis/Escrow.json'
@@ -113,12 +116,19 @@ const [properties,setProperties]=useState([])
             
             <Search />
             
-            
+          <hr/>  
 <div className='cards__section'>
+<hr/>
+
+<h1 style={{fontWeight:"",fontFamily:"",fontSize:"30px"}}>New to this website?</h1>
 
 
 
-<hr />
+
+
+
+
+
 
 <div className='cards'>
   {homes.map((home, index) => (
@@ -167,6 +177,9 @@ const [properties,setProperties]=useState([])
         </Route>
         <Route exact path= "/userdashboard/my_properties">
         <MyProperties propertyNft={propertyNft} provider={provider} loadBlockchainData={loadBlockchainData} account={account}/> { /* no neeed fro prop passing here yet */}
+        </Route>
+        <Route exact path= "/userdashboard/Profile">
+        <Profile propertyNft={propertyNft} provider={provider}/>
         </Route>
       </Switch>     
      </Router>

@@ -1,6 +1,7 @@
 import {React,useState} from 'react'
 import VerifiedRequests from './User_Dashboard/VerifiedRequests'
 import Transactions from './User_Dashboard/Transactions'
+import Profile from './User_Dashboard/Profile'
 import {BrowserRouter as Router,
   Switch,
   Route,Link} from 'react-router-dom'

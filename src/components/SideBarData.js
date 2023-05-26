@@ -6,6 +6,12 @@ import * as BsIcons from 'react-icons/bs';
 
 export const SidebarData = [
   {
+    title: 'Profile',
+   path: '/userdashboard/Profile',
+    icon: <AiIcons.AiOutlineUser />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Verified requests',
     path: '/userdashboard/verified_requests',
     icon: <AiIcons.AiFillHome />,
@@ -17,10 +23,5 @@ export const SidebarData = [
     icon: <BsIcons.BsBuildingsFill />,
     cName: 'nav-text'
   },
-  // {
-  //   title: 'Transactions',
-  //   path: '/userdashboard/transactions',
-  //   icon: <IoIcons.IoIosPaper />,
-  //   cName: 'nav-text'
-  // },
+   
 ];
