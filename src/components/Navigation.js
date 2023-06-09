@@ -1,12 +1,17 @@
 import { ethers } from 'ethers';
+import { useContext } from 'react';
 //import logo from '../assets/logo.png';
 import newlogo from '../assets/newlogo.png'
 import {
     Link
   } from "react-router-dom";
+import AppContext from '../context/AppContext';
   const landInspector="0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc"
 ////////////////////////propertyOwner state is passed here//////
-const Navigation = ({ account, setAccount,formData,setFormData}) => { 
+const Navigation = () => { 
+
+    const {account, setAccount}=useContext(AppContext)
+
     const connectHandler = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = ethers.utils.getAddress(accounts[0])

@@ -1,6 +1,11 @@
 const connectToMongo = require('./db'); //refactoring is required for  image upload and retrive blocks
 const express = require('express')
 const cors = require("cors");
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+}
 const Properties = require('./models/propertyList')/////////////image upload///////////
 connectToMongo();
 const app = express()
@@ -11,7 +16,7 @@ const port = 5000
 
 app.use(express.json());  
                                                   
-app.use(cors());
+app.use(cors(corsOptions));
 app.use('/', require('./routes/auth'));
 
 // app.use('/api/notes', require('./routes/notes'))

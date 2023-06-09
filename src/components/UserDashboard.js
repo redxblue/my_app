@@ -8,7 +8,7 @@ import {SidebarData} from './SideBarData'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import './SideBar.css'
-function UserDashboard({propertyNft,provider}) {
+function UserDashboard() {
   const [temp,setTemp]=useState(false);
   const show=()=>{
     setTemp(!temp)

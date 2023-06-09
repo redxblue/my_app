@@ -1,16 +1,21 @@
-import {React,useEffect,useState} from 'react'
+import {React,useEffect,useState,useContext} from 'react'
 import { ethers } from 'ethers';
 import axios from 'axios'
 import { providers } from 'ethers'
 import UserDashboard from '../UserDashboard';
 import './Transactions.css' //////////////////// ⭐⭐CSS IS IMPORTED HERE
+import AppContext from '../../context/AppContext';
+
 const FormData = require('form-data')
 const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI0MWU2NjYwMS01NDc2LTQwMDYtOTk2ZS02Mjk2NGE5ZDk2YWQiLCJlbWFpbCI6InNoYXJvbmpvYjQxMEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiNWE0OTg5NDUzODYzMmI2OGFlNzUiLCJzY29wZWRLZXlTZWNyZXQiOiI0NmY4ZGUxZWVhZGE3OGM1NWQ1NDg1MGI4Njc1NDZhYTI0ODc5NmU0MmY0NWE1MThlM2Y0NzQzZDVhMGJmOGQxIiwiaWF0IjoxNjgyMDg0NDQ3fQ.bb5-y3RmrZkAryeIzn2zIIl_ztej-TOw7pTPT-jz0cw"
 //const fs = require('fs')
 //const pinataSDK = require('@pinata/sdk');
 //const pinata = new pinataSDK('5a49894538632b68ae75', '46f8de1eeada78c55d54850b867546aa248796e42f45a518e3f4743d5a0bf8d1');
 
-function VerifiedRequests({propertyNft,provider,account}){
+function VerifiedRequests(){
+
+  const {propertyNft,provider,account}=useContext(AppContext)
+
  // console.log(MONGODB_URI)
  const propertyNftcontract=propertyNft
 const owner=account//const owner="0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
@@ -62,7 +67,9 @@ const publishProperty=async(obj)=>{
     const signer = provider.getSigner();
     const creator = await signer.getAddress()
     console.log(obj.securityDeposit)
-    const mintConfirmation= await propertyNftcontract.connect(signer).mint(creator,json,obj.securityDeposit,obj.price ) //⭐⭐⭐Minting
+    const rentAmount=ethers.BigNumber.from(`${obj.price*10**18}`).toString()
+    const securityDeposit=ethers.BigNumber.from(`${obj.securityDeposit*10**18}`).toString()
+    const mintConfirmation= await propertyNftcontract.connect(signer).mint(creator,json,securityDeposit,rentAmount) //⭐⭐⭐Minting
     console.log(mintConfirmation.hash)
     const receipt = await provider.getTransactionReceipt(mintConfirmation.hash);
     const tokenIdHex=receipt.logs[0].topics[3]

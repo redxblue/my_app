@@ -1,11 +1,14 @@
 import axios from "axios";
 import { ethers } from 'ethers';
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import {
   Link
 } from "react-router-dom";
+import AppContext from "../context/AppContext";
 
-function ViewProperties({propertyNft,properties,provider}) { //properties contains an array of metadata of nfts (NOT token URIs)
+function ViewProperties() { //properties contains an array of metadata of nfts (NOT token URIs)
+  const {name,propertyNft,properties,provider}=useContext(AppContext)
+  console.log(name)
   console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
   console.log(properties)
   const [toggle, setToggle] = useState(true);

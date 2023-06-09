@@ -1,9 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { Contract, ethers } from 'ethers';
 import './Transactions.css'//////////////////// ⭐⭐CSS IS IMPORTED HERE
 import UserDashboard from '../UserDashboard'
 import getUserInfo from '../../Database/getUserInfo';
-function MyProperties({propertyNft,provider,loadBlockchainData,account}) {
+import AppContext from '../../context/AppContext';
+
+function MyProperties() {
+  
+  const {propertyNft,provider,loadBlockchainData,account}=useContext(AppContext)
+
   const [myProperties,setMyProperties]=useState([])
   const [isPropertyOwner,setIsPropertyOwner]=useState()
   useEffect(() => {

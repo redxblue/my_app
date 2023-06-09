@@ -107,7 +107,7 @@ function Register() {
     </div>
   </div>
 {/*/////////////////////////radio check form ////////Property owner state will be passed from app.js////////////*/}
-<div class="mx-auto col-10 col-md-8 col-lg-6"> 
+<div className="mx-auto col-10 col-md-8 col-lg-6"> 
   <div className="form-check form-check-inline">
     <input
       className="form-check-input"type="radio"name="propertyOwner" value={true} id="flexRadioDefault1"
@@ -126,7 +126,7 @@ function Register() {
 </div>
 {/*/////////////////////////radio check form ////////Property owner state will be passed from app.js////////////*/}
   {/*////////OTP////////*/}
-  {isValid && <div class="mx-auto col-10 col-md-8 col-lg-6"> 
+  {isValid && <div className="mx-auto col-10 col-md-8 col-lg-6"> 
   <label htmlFor="exampleInputEmail1" className="form-label">
       Enter OTP
     </label>
@@ -146,7 +146,7 @@ function Register() {
 
 
  
-  <div class="text-center">
+  <div className="text-center">
   <button type="submit" className="btn btn-primary my-3"onClick={validation}>
     Submit
   </button>
@@ -158,7 +158,7 @@ function Register() {
 
 {registered && 
 <div className="alert alert-success my-5" role="alert">
-<p class="text-center">
+<p className="text-center">
     {`Welcome ${name} you are successfully registered!\n Proceed to `} <Link to="/">Home page</Link></p>
 </div>
 

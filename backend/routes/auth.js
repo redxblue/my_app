@@ -3,15 +3,18 @@ const User = require('../models/userSchema');
 const Property = require('../models/propertyList')
 const router = express.Router();
 const tempo="74078989154";
+const path=require('path')
 const fs = require('fs');
+require("dotenv").config({path:path.resolve(__dirname, '../.env')});
 /////////////////PINATA SDK///////////////////
 const pinataSDK = require('@pinata/sdk');
-const pinata = new pinataSDK('5a49894538632b68ae75', '46f8de1eeada78c55d54850b867546aa248796e42f45a518e3f4743d5a0bf8d1');
+const pinata = new pinataSDK(`${process.env.PINATA_API_KEY}`, `${process.env.PINATA_SECRET_API_KEY}`);
 
 
 //////////////////////////////////////////Route #0--checking account type////////////////////////////////
 router.post('/', async(req, res)=>{
     try {
+        console.log(`${process.env.SAMPLE}`)
         let user = await User.findOne({Wallet:req.body.Wallet}); //checking if user exists
         if (user) {
             console.log(user)
@@ -155,6 +158,7 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
                    return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`
                }).catch((err) => {
                    //handle error here
+                   alert(err)
                    console.log(err);
                });
            
@@ -183,6 +187,7 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
                    return `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`
                }).catch((err) => {
                    //handle error here
+                   alert(err)
                    console.log(err);
                });
            }

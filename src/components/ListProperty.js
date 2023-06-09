@@ -1,10 +1,11 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 //import axios from 'axios'
 import FileUploaded from './FileUploaded'
 //import { use } from '../../backend/routes/auth';
+import AppContext from '../context/AppContext';
 
-function ListProperty({account}) {
-
+function ListProperty() {
+  const {account}=useContext(AppContext)
   let base64Code="";
   const getBase64=(file, cb)=>{
     let reader = new FileReader();

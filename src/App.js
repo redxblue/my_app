@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,createContext } from 'react';
 import { ethers } from 'ethers';
 import {
   BrowserRouter as Router,
@@ -26,86 +26,87 @@ import MyProperties from './components/User_Dashboard/MyProperties';
 import PropertyNft from './abi/PropertyNft.json'
 // Config
 import config from './config.json';
+import getUserInfo from './Database/getUserInfo';
 
-
+import AppContext from './context/AppContext';
 
 function App() {
+  //getUserInfo();
+    ///////////////My states///////////////////
+  const[propertyOwner,setPropertyOwner]=useState(false);
+  const [propertyNft,setPropertyNft]=useState({});
+  const [properties,setProperties]=useState([])
 
-  ///////////////My states///////////////////
-const[propertyOwner,setPropertyOwner]=useState(false);
-const [propertyNft,setPropertyNft]=useState({});
-const [properties,setProperties]=useState([])
+    ///////////////My states///////////////////
+    const [provider, setProvider] = useState(null)
+    const [escrow, setEscrow] = useState(null)
 
-  ///////////////My states///////////////////
-  const [provider, setProvider] = useState(null)
-  const [escrow, setEscrow] = useState(null)
+    const [account, setAccount] = useState(null)
 
-  const [account, setAccount] = useState(null)
+    const [homes, setHomes] = useState([])
+    const [home, setHome] = useState({})
+    const [toggle, setToggle] = useState(false);
 
-  const [homes, setHomes] = useState([])
-  const [home, setHome] = useState({})
-  const [toggle, setToggle] = useState(false);
+    const loadBlockchainData = async () => {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      setProvider(provider)
+      const network = await provider.getNetwork()
+      console.log(network)
+      console.log(provider);
+      const propertyNft = new ethers.Contract(config[network.chainId].propertyNft.address, PropertyNft, provider)
+                                                     //👆contract address,Abi,provider
+      setPropertyNft(propertyNft)
+      console.log(propertyNft)
+      const totalSupply = await propertyNft.totalSupply()
+      console.log(`total supply is ${totalSupply}`)
+      const properties1=[];
+      for(var i=0;i<totalSupply;++i) ////////Metamsk error of invalid token ID
+      {
+        const uri = await propertyNft.tokenURI(i) ///// initially will give error as no nft is minted yet
+        const response = await fetch(uri)
+        console.log(response)
+        let metadata = await response.json()
+        metadata={...metadata, tokenid:i} //appending token ID to the URI response //to be used with View Properties to rent
+        console.log(metadata);
+        properties1.push(metadata)
+      }
+      setProperties(properties1)
+      console.log(properties)
+      //const realEstate = new ethers.Contract(config[network.chainId].realEstate.address, RealEstate, provider)
+      //const totalSupply = await realEstate.totalSupply()
+      //const homes = []
 
-  const loadBlockchainData = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(provider)
-    const network = await provider.getNetwork()
-    console.log(network)
-    console.log(provider);
-    const propertyNft = new ethers.Contract(config[network.chainId].propertyNft.address, PropertyNft, provider)
-                                                   //👆contract address,Abi,provider
-    setPropertyNft(propertyNft)
-    console.log(propertyNft)
-    const totalSupply = await propertyNft.totalSupply()
-    console.log(`total supply is ${totalSupply}`)
-    const properties1=[];
-    for(var i=0;i<totalSupply;++i) ////////Metamsk error of invalid token ID
-    {
-      const uri = await propertyNft.tokenURI(i) ///// initially will give error as no nft is minted yet
-      const response = await fetch(uri)
-      console.log(response)
-      let metadata = await response.json()
-      metadata={...metadata, tokenid:i} //appending token ID to the URI response //to be used with View Properties to rent
-      console.log(metadata);
-      properties1.push(metadata)
+     /* for (var i = 1; i <= totalSupply; i++) {
+        const uri = await realEstate.tokenURI(i)   //fetching from nfts👈👈👈⭐⭐⭐⭐⭐
+        const response = await fetch(uri)
+        const metadata = await response.json()
+        homes.push(metadata)               ///////array of metadata⭐⭐⭐⭐⭐
+      }
+
+      setHomes(homes)
+
+      const escrow = new ethers.Contract(config[network.chainId].escrow.address, Escrow, provider)
+      setEscrow(escrow) */
+
+      window.ethereum.on('accountsChanged', async () => {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = ethers.utils.getAddress(accounts[0])
+        setAccount(account);
+      })
     }
-    setProperties(properties1)
-    console.log(properties)
-    //const realEstate = new ethers.Contract(config[network.chainId].realEstate.address, RealEstate, provider)
-    //const totalSupply = await realEstate.totalSupply()
-    //const homes = []
 
-   /* for (var i = 1; i <= totalSupply; i++) {
-      const uri = await realEstate.tokenURI(i)   //fetching from nfts👈👈👈⭐⭐⭐⭐⭐
-      const response = await fetch(uri)
-      const metadata = await response.json()
-      homes.push(metadata)               ///////array of metadata⭐⭐⭐⭐⭐
+    useEffect(() => {
+      loadBlockchainData()
+    }, [])
+
+    const togglePop = (home) => {
+      setHome(home)
+      toggle ? setToggle(false) : setToggle(true);
     }
-
-    setHomes(homes)
-
-    const escrow = new ethers.Contract(config[network.chainId].escrow.address, Escrow, provider)
-    setEscrow(escrow) */
-
-    window.ethereum.on('accountsChanged', async () => {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const account = ethers.utils.getAddress(accounts[0])
-      setAccount(account);
-    })
-  }
-
-  useEffect(() => {
-    loadBlockchainData()
-  }, [])
-
-  const togglePop = (home) => {
-    setHome(home)
-    toggle ? setToggle(false) : setToggle(true);
-  }
 
   return (
     <div> 
-    
+    <AppContext.Provider value={{home,account,setAccount,provider,propertyNft,properties,loadBlockchainData,name:"Bhai"}}>
       <Router>
       <Navigation account={account} setAccount={setAccount} />
       <Switch>
@@ -170,7 +171,7 @@ const [properties,setProperties]=useState([])
         </Route>
       </Switch>     
      </Router>
-     
+     </AppContext.Provider>
     </div>
   );
 }

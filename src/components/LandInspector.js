@@ -1,32 +1,33 @@
 import {React,useEffect,useState} from 'react'  //0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 -land Inspector
 
 function LandInspector() {
-useEffect(()=>{
-getPendingRequests();
-},[]);
-const [data, setData] = useState([]);
-const [authenticated,setAuthenticated]=useState(false)
-const getPendingRequests=async()=>{
-const response = await fetch("http://localhost:5000/landinspector", {
-      method: 'GET',    
-  });
-  const json = await response.json()
-  console.log(json)
-  setData(json)
-}
-const authenticateListing=async(id)=>{
-  const response = await fetch("http://localhost:5000/landinspector", {
-      method: 'POST', 
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({_id:id})
-  });
-  const json = await response.json()
-  console.log(json)
+    
+  useEffect(()=>{
   getPendingRequests();
-  
-}
+  },[]);
+  const [data, setData] = useState([]);
+  const [authenticated,setAuthenticated]=useState(false)
+  const getPendingRequests=async()=>{
+  const response = await fetch("http://localhost:5000/landinspector", {
+        method: 'GET',    
+    });
+    const json = await response.json()
+    console.log(json)
+    setData(json)
+  }
+  const authenticateListing=async(id)=>{
+    const response = await fetch("http://localhost:5000/landinspector", {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({_id:id})
+    });
+    const json = await response.json()
+    console.log(json)
+    getPendingRequests();
+    
+  }
     
   return (
     <div className='row'>
