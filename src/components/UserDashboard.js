@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React,useState,useContext} from 'react'
 import VerifiedRequests from './User_Dashboard/VerifiedRequests'
 import Transactions from './User_Dashboard/Transactions'
 import {BrowserRouter as Router,
@@ -8,7 +8,10 @@ import {SidebarData} from './SideBarData'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import './SideBar.css'
+import AppContext from '../context/AppContext';
+
 function UserDashboard() {
+  const {blur,setBlur}=useContext(AppContext)
   const [temp,setTemp]=useState(false);
   const show=()=>{
     setTemp(!temp)
@@ -17,7 +20,7 @@ function UserDashboard() {
   return (
     <>
    
-    <h1 onClick={show} style={{backgroundColor: "#1750AC", color:"white",padding: "15px", fontsize:"20",cursor: "pointer",margin:"0px",height:"60px"}}>This is User Dashboard</h1>
+    <h1 onClick={show} style={{color:"white",padding: "8px", fontsize:"16",cursor: "pointer",margin:"0px",height:"60px",textAlign:"left"}}>DASHBOARD</h1>
 
 {/* temp?<VerifiedRequests propertyNft={propertyNft} provider={provider} />:"" */}
    
@@ -29,7 +32,7 @@ function UserDashboard() {
             <FaIcons.FaBars />
           </Link>} */}
         </div>
-        <nav className='nav-menu active'>
+        <nav className={blur?'nav-menu activeBlur':'nav-menu active'}>
           <ul className='nav-menu-items'>
            {/* { <li className='navbar-toggle'>
               <Link to='#' className='menu-bars'>

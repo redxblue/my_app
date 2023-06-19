@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap'); */
+
+ @import url('https://fonts.googleapis.com/css2?family=Nunito');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Nunito";
 }
 
 :root {
@@ -17,9 +21,15 @@
 
 body {
   margin: 0;
-  font-family: "Open Sans";
+  font-family: "nunito";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./assets/houses.png");
+  background-position: center;
+  /*background-repeat: no-repeat;*/
+  background-size: cover;
+  min-height: 100vh;
+  
 }
 
 /* ------------------------------------------------------ */
@@ -29,6 +39,7 @@ nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  background-color: rgba(231, 231, 231, 0);            /**/
 }
 
 .nav__brand {
@@ -46,7 +57,10 @@ nav {
   height: auto;
 }
 
-
+.nav-menu.active{
+  background-color: rgb(0 0 0 / 13%);
+  backdrop-filter: blur(2px);
+}
 
 
 
@@ -64,7 +78,7 @@ nav {
   white-space: nowrap;
   /*display:-webkit-inline-box;*/
   list-style: none;
-  
+  font-family: "Nunito";
 }
 
 .nav__links li {
@@ -75,12 +89,12 @@ nav {
 
 .nav__links li a {
   text-decoration: none;
-  color: var(--clr-black);
+  color: rgb(255, 255, 255);
   
 }
 
 .nav__links li a:hover {
-  color: var(--clr-blue);
+  color: rgb(13, 225, 240);
 }
 
 .nav__connect {
@@ -88,13 +102,13 @@ nav {
   height: 50px;
   margin: 0 auto;
 
-  background-color: var(--clr-blue);
+  background-color:#1F7087;  /**/
   color: var(--clr-white);
 
   border: none;
   border-radius: 4px;
 
-  font-family: "Open Sans";
+  font-family: "Nunito";
   font-size: 1.10em;
   font-weight: 600;
 
@@ -103,7 +117,7 @@ nav {
 }
 
 .nav__connect:hover {
-  background-color: var(--clr-blue-2);
+  background-color: rgb(231, 156, 15);
 }
 
 /* ------------------------------------------------------ */
@@ -111,11 +125,12 @@ nav {
 
 header {
   background-image: url("./assets/houses.png");
+  background-repeat: no-repeat;/**/
   background-position: center;
   background-size: cover;
-  min-height: 40vh;
-
+  min-height: 85vh; /**/
   position: relative;
+
 }
 
 .header__title {
@@ -123,14 +138,34 @@ header {
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  font-family: "Nunito";
   color: var(--clr-white);
-  font-size: 2em;
-
+  font-size: 2.5em;
   width: 100%;
   text-align: center;
 }
-
+.header__quote{      /**/
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right:15%;
+  text-align: center;
+  font-size: 2.5em;
+  color:white;
+  text-shadow: 8px 2px 10px #252525;
+  
+}
+.header__subquote{      /**/
+  position: absolute;
+  top: 67%;
+  left: 30%;
+  right:30%;
+  text-align: center;
+  font-size: 1.0em;
+  color:white;
+   
+  text-shadow: 2px 2px 5px #020202;
+}
 .header__search {
   padding: 25px;
   min-width: 40%;
@@ -365,4 +400,19 @@ header {
   .nav__links {
     display: none;
   }
+}
+
+.form-text{
+  color:#FFFFFF
+}
+label{
+  color: #FFFFFF;
+       /**/
+  font-size: medium;
+  font-weight: 400;
+  text-shadow: 2px 2px 1px #252525;
+}
+.table{
+  backdrop-filter: blur(20px)saturate(70%);
+
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/userSchema');
 const Property = require('../models/propertyList')
+//const latestTransaction=require('../models/latestTransaction')
 const router = express.Router();
 const tempo="74078989154";
 const path=require('path')
@@ -15,16 +16,17 @@ const pinata = new pinataSDK(`${process.env.PINATA_API_KEY}`, `${process.env.PIN
 router.post('/', async(req, res)=>{
     try {
         console.log(`${process.env.SAMPLE}`)
-        let user = await User.findOne({Wallet:req.body.Wallet}); //checking if user exists
+        let user = await User.findOne({Wallet:req.body.Wallet});
+        console.log(`Wallet from auth.js route#0 ${req.body.Wallet}`) //checking if user exists
         if (user) {
             console.log(user)
-            return res.status(200).json(user.property_owner)
+            return res.status(200).json(user)//user.property_owner
         }
         else{
             return res.status(400).json(null)
         }
     } catch (error) {
-        console.error(error.message);
+        console.error(`This is of error code 500 : ${error.message}`);
         res.status(500).send("Some Error occured");
       }
     })
@@ -62,7 +64,7 @@ router.post('/register', async(req, res)=>{
                 return res.status(422).json({error:"Property already exists"});
             }
             else{
-                const newProperty =new Property({address,img,description,price,securityDeposit,area,facilities:{
+                const newProperty =new Property({owner:Wallet,address,img,description,price,securityDeposit,area,facilities:{
                     beds:req.body.facilities.beds,
                     bathrooms:req.body.facilities.bathrooms
                   },pincode,state })
@@ -114,7 +116,7 @@ router.post('/userdashboard', async(req, res)=>{
             }
     }
     catch(error){
-        console.log(error);
+        console.log(`Error from verified requests : ${error}`);
         res.status(500).send("Some Error occured");
     }
 
@@ -126,6 +128,7 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
         if(req.body.id){
             console.log(req.body.id) //what if another person has this property id and tries to impersonate the owner
             const propToBePublished=await Property.find({_id : req.body.id});
+            console.log(`propToBePublished=> ${propToBePublished[0].facilities.beds}`)
             console.log(propToBePublished[0].facilities);
            let image = propToBePublished[0].img.split("base64,")[1]; //taking out "data:image/jpeg;base64," from the base64 string
            //const myArray = propToBePublished[0].img.split("data:image/png;base64,,"); 
@@ -174,8 +177,8 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
                price: propToBePublished[0].price,
                securityDeposit: propToBePublished[0].securityDeposit,
                image:imageUrl,
-               facilities:{ beds:3,
-                            bathrooms:4
+               facilities:{ beds:propToBePublished[0].facilities.beds,
+                            bathrooms:propToBePublished[0].facilities.bathrooms
                },
                description:propToBePublished[0].description,
                pincode:propToBePublished[0].pincode,
@@ -212,6 +215,62 @@ router.post('/userdashboard/publishtoblockchain', async(req, res)=>{
     }
 
 });
-//email: req.body.email
+// //////////////////////////////////////////////////////////Route #6-Userdashboard My properties-Check for due date///////////////////////////
+// router.post('/userdashboard/myproperties', async(req, res)=>{
+//     const {tokenId}=req.body
+//     try{
+//         const latestTransactionDate=await latestTransaction.findOne({tokenId:tokenId})//{owner:req.body.owner,verified:true}
+//         if(latestTransactionDate){
+//             console.log(latestTransactionDate)
+//             if(latestTransactionDate.latest==null)
+//             {   console.log(`Latest transaction is null => ${latestTransactionDate.latest}`)
+//                 return res.status(200).json(true);
+
+//             }
+//             else{
+//                 const currentDate=new Date();
+//                 (currentDate.getTime()>latestTransactionDate.latest.getTime()+2592000000)
+//                 ?res.status(200).json(true)
+//                 :res.status(200).json(false);
+//             }
+//         }
+        
+//         else{ //if no details about transaction exist
+//             const temp=await latestTransaction.insertMany({tokenId:tokenId,latest:new Date()}); //insertOne doesnt seem to work
+//             console.log(temp)
+//             temp?res.status(201).json({error:"first transaction time registered"})
+//             :res.status(422).json({error:"Date is not Due or Transaction date unavailable"});
+//             }
+//     }
+//     catch(error){
+//         console.log(`Error from latest Transaction dates : ${error}`);
+//         res.status(500).send("Some Error occured");
+//     }
+
+// });
+// //////////////////////////////////////////////////////////Route #7-Userdashboard My properties-Update latest transaction time///////////////////////////
+
+// router.post('/userdashboard/myproperties/transactionsuccess', async(req, res)=>{
+//     const {tokenId}=req.body
+//     try{
+//         const transactionRecorded= await latestTransaction.updateOne({tokenId:tokenId},{
+//             $set:{
+//                 latest:new Date()
+//             }  
+//         })
+//         if(transactionRecorded){
+
+//             return res.status(200).json({message:"Latest transaction time succesfull recorded"});
+//         }
+//         else{
+//             res.status(422).json({error:"Latest transaction time not updated"})
+//             }
+//     }
+//     catch(error){
+//         console.log(error);
+//         res.status(500).send("Some Error occured");
+//     }
+
+// });
 module.exports = router
 //aadhar_no:tempo

@@ -1,0 +1,21 @@
+Property Owner              |   Tenent
+__________________________________________________        
+1.user registration           |1.user registration 
+        👇                                                                     
+2.adds property                |
+        👇                                                                     
+
+3.inspector verifies          |
+        👇                                                                     
+        
+4.owner publishes/mints NFT   |
+        👇                                                                    
+5.property gets listed        👉6.Tenent rents property
+        |                                   👇
+                                6.1[Pays security deposit&first month rent]
+        |                                   👇                                 
+7.Owner ends Contract         👈6.2 Pays Rent every month [for demo purpose-every 1 minute]
+        👇
+7.1[pays security deposit back to tenent] 
+
+***************************** THE END ******************************

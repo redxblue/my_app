@@ -1,3 +1,4 @@
+/*
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -36,7 +37,7 @@ input::-webkit-inner-spin-button {
   
   .container input:valid ~ label,
   .container input:focus ~ label {
-    color: rgb(10, 131, 212);
+    color: rgb(253, 253, 253);
     transform: translateY(-15px);
     font-size: .6rem;
   }
@@ -58,3 +59,4 @@ input::-webkit-inner-spin-button {
     background: linear-gradient(90deg, #ff1b69, #ff0, #2196f3, #9c27b0, #ff1b69);
     animation: animate 3s linear infinite;
   }
+  */

@@ -1,4 +1,4 @@
-import { useEffect, useState,createContext } from 'react';
+import { useEffect, useState} from 'react';
 import { ethers } from 'ethers';
 import {
   BrowserRouter as Router,
@@ -20,6 +20,9 @@ import UserDashboard from './components/UserDashboard';
 import Transactions from './components/User_Dashboard/Transactions';
 import VerifiedRequests from './components/User_Dashboard/VerifiedRequests';
 import MyProperties from './components/User_Dashboard/MyProperties';
+import Loader from './components/Loader';
+import Profile from './components/User_Dashboard/Profile';
+import Modal from './components/Modal/Modal';
 // ABIs
 //import RealEstate from './abis/RealEstate.json'
 //import Escrow from './abis/Escrow.json'
@@ -31,13 +34,18 @@ import getUserInfo from './Database/getUserInfo';
 import AppContext from './context/AppContext';
 
 function App() {
-  //getUserInfo();
+  //
     ///////////////My states///////////////////
   const[propertyOwner,setPropertyOwner]=useState(false);
   const [propertyNft,setPropertyNft]=useState({});
   const [properties,setProperties]=useState([])
 
     ///////////////My states///////////////////
+    const [toggle, setToggle] = useState(true);
+    const [desc,setDesc]=useState()
+    const [modal, setModal] = useState(false);
+    const [user,setUser]=useState([])
+    const [blur,setBlur]=useState(null)
     const [provider, setProvider] = useState(null)
     const [escrow, setEscrow] = useState(null)
 
@@ -45,8 +53,9 @@ function App() {
 
     const [homes, setHomes] = useState([])
     const [home, setHome] = useState({})
-    const [toggle, setToggle] = useState(false);
+   
 
+  
     const loadBlockchainData = async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       setProvider(provider)
@@ -67,6 +76,13 @@ function App() {
         console.log(response)
         let metadata = await response.json()
         metadata={...metadata, tokenid:i} //appending token ID to the URI response //to be used with View Properties to rent
+        const tenent=await propertyNft.tenentOf(i) //i -> tokenID
+        if(tenent!=ethers.constants.AddressZero){ //Zero address = ethers.constants.AddressZero
+          metadata={...metadata, isRented:true}
+        }
+        else{
+          metadata={...metadata, isRented:false} //to check whether the property has already been rented
+        }                                                  
         console.log(metadata);
         properties1.push(metadata)
       }
@@ -92,13 +108,23 @@ function App() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = ethers.utils.getAddress(accounts[0])
         setAccount(account);
+        const result=await getUserInfo(account) //to fetch account details from database
+        const a=[]
+        a.push(result)
+        setUser(a)
       })
     }
-
+    
     useEffect(() => {
       loadBlockchainData()
     }, [])
-
+    // // useEffect(()=>{
+    //   getUserInfo(account).then((result)=>{
+    //     const a=[]
+    //     a.push(result)
+    //     setUser(a)
+    // //   })
+    // // },account)
     const togglePop = (home) => {
       setHome(home)
       toggle ? setToggle(false) : setToggle(true);
@@ -106,21 +132,23 @@ function App() {
 
   return (
     <div> 
-    <AppContext.Provider value={{home,account,setAccount,provider,propertyNft,properties,loadBlockchainData,name:"Bhai"}}>
+    <AppContext.Provider value={{modal,setModal,setDesc,user,setUser,home,account,setAccount,provider,propertyNft,properties,blur,setBlur,loadBlockchainData}}>
+      {blur&&<Loader/>}
+      {modal&&<Modal desc={desc} />}
       <Router>
       <Navigation account={account} setAccount={setAccount} />
       <Switch>
       <Route exact path="/" >
             
-            <Search />
+            {<Search />}
             
             
 <div className='cards__section'>
 
 
 
-<hr />
 
+{/* <hr />
 <div className='cards'>
   {homes.map((home, index) => (
     <div className='card' key={index} onClick={() => togglePop(home)}>
@@ -138,11 +166,11 @@ function App() {
       </div>
     </div>
   ))}
-</div> 
+</div> }
 
-   {toggle && (
+   {/* {toggle && (
         <Home home={home} provider={provider} account={account} escrow={escrow} togglePop={togglePop} />
-      )}
+      )} */}
       </div>
         </Route>
         <Route exact path= "/register">
@@ -152,22 +180,25 @@ function App() {
         <ListProperty account={account} />
         </Route>
         <Route exact path= "/viewproperties">
-        <ViewProperties propertyNft={propertyNft} provider={provider} properties={properties} loadBlockchainData={loadBlockchainData} />
+        <ViewProperties/>
         </Route>
         <Route exact path= "/landinspector">
         <LandInspector />
         </Route>
         <Route exact path= "/userdashboard">
-        <UserDashboard propertyNft={propertyNft} provider={provider}/>
+        <UserDashboard />
         </Route>
         <Route exact path= "/userdashboard/transactions">
-        <Transactions propertyNft={propertyNft} provider={provider}/> { /* no neeed fro prop passing here yet */}
+        <Transactions /> { /* no neeed fro prop passing here yet */}
         </Route>
         <Route exact path= "/userdashboard/verified_requests">
-        <VerifiedRequests propertyNft={propertyNft} provider={provider} account={account}/> { /* no neeed fro prop passing here yet */}
+        <VerifiedRequests /> { /* no neeed fro prop passing here yet */}
         </Route>
         <Route exact path= "/userdashboard/my_properties">
-        <MyProperties propertyNft={propertyNft} provider={provider} loadBlockchainData={loadBlockchainData} account={account}/> { /* no neeed fro prop passing here yet */}
+        <MyProperties /> { /* no neeed fro prop passing here yet */}
+        </Route>
+        <Route exact path= "/userdashboard/profile">
+        <Profile/> { /* no neeed fro prop passing here yet */}
         </Route>
       </Switch>     
      </Router>

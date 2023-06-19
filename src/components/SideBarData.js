@@ -6,6 +6,12 @@ import * as BsIcons from 'react-icons/bs';
 
 export const SidebarData = [
   {
+    title: 'Profile',
+    path: '/userdashboard/profile',
+    icon: <BsIcons.BsFillPersonFill />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Verified requests',
     path: '/userdashboard/verified_requests',
     icon: <AiIcons.AiFillHome />,

@@ -1,13 +1,10 @@
 import axios from "axios";
 import { ethers } from 'ethers';
 import { useState, useEffect,useContext } from "react";
-import {
-  Link
-} from "react-router-dom";
 import AppContext from "../context/AppContext";
 
 function ViewProperties() { //properties contains an array of metadata of nfts (NOT token URIs)
-  const {name,propertyNft,properties,provider}=useContext(AppContext)
+  const {name,propertyNft,properties,provider,loadBlockchainData}=useContext(AppContext)
   console.log(name)
   console.log(propertyNft)                         // https://gateway.pinata.cloud/ipfs/QmXsC9BvuSTkzBp5R2SRzpa3udHURqsAC8BiD9b5zJTEBB
   console.log(properties)
@@ -29,6 +26,8 @@ function ViewProperties() { //properties contains an array of metadata of nfts (
       .then((res) => setData(res.data))
       .catch((err) => console.log(err, "it has an error"));
   },[]);
+
+
   const rentProperty=async(obj)=>{
     console.log(obj)
     console.log(obj.tokenid)
@@ -41,28 +40,35 @@ function ViewProperties() { //properties contains an array of metadata of nfts (
     console.log(tx)
     const ftx= await tx.wait();
     console.log(ftx)
-    setToggle(false)
-    }   
+    if(ftx){
+        setToggle(false) //this makes the toggle part of the component re render
+       }
+       await loadBlockchainData();
+      }   
+
+
   return ( 
     <div className="" >
-      <h2 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>Homes near you</h2>
+      <h2 style={{ color:"white",padding: "20px",}}>Homes </h2>
       <div className="row ">
-        {console.log(data)}
+        {console.log(`properties from blockchain=> ${properties}`)}
        {properties.map((obj) => {
         
           //console.log(base64String)
           return (
             
              <div className="col">
-              <div className="card" style={{ width: "" ,height:"94vh"}}>
+              <div className="card" style={{ width: "" ,height:"auto"}}>
                   <img className="card-img-top" src={obj.image} alt="Card image cap" />
                   <div className="card-body">
-                  <strong className='card-text'>  {obj.price} ETH </strong>
+                  <strong className='card-text'>Price : {obj.price} ETH </strong>
+                  <br></br>
+                  <strong className='card-text'> Security Deposit : {obj.securityDeposit} ETH </strong>
                   <p className='card-text'> <strong>{obj.facilities.beds}</strong> beds |
                   <strong>{obj.facilities.bathrooms} </strong>bathrooms 
                   </p>
                
-                  <p className="card-text" style={{fontWeight:"400"}}>{obj.address}</p>           {/*`Price:${obj.price}` */}
+                  <p className="card-text" style={{fontWeight:"400"}}>{obj.address},{obj.state}</p>           {/*`Price:${obj.price}` */}
                 <p></p>
                 <p className="card-title" style={{fontSize:"15px",fontWeight:"400"}}>
                   {obj.description}
@@ -71,7 +77,9 @@ function ViewProperties() { //properties contains an array of metadata of nfts (
                   
                   
                   <div class=" text-center" >
-                  <button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>   </div>
+                 { toggle&&!obj.isRented?<button className="btn btn-primary" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Rent</button>
+                  : <button className="btn btn-secondary disabled" key={obj.tokenId} onClick={()=>rentProperty(obj)}>Tenanted</button>}
+                </div>
                   </div>
                   </div>
               </div>

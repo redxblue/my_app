@@ -357,6 +357,11 @@
         "internalType": "uint256",
         "name": "rentAmount",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "latestTransactionTime",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

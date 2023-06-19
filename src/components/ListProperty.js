@@ -89,9 +89,10 @@ const[filedata,setFileData]=useState(null)
     });
 
   };
-  return (
+  return (<>
+    
     <div className="row my-10" style={{margin:"12px"}}>
-      <h3 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>List your property</h3>
+      <h3 style={{ color:"white",padding: "20px",}}>List your property</h3>
       <form action="/listproperty"method="POST" encType="multipart/form-data"> 
         <div className="row ">
           <div className="col-md-4 mb-3 w-50">
@@ -221,19 +222,21 @@ const[filedata,setFileData]=useState(null)
           </div>
         </div>
 
-        <div className="col-md-3 mb-3 w-50" style={{margin:"25px"}} >
+        <div className="col-md-3 mb-3 w-50" style={{margin:"25px",color:"white"}} >
         <FileUploaded  onFileSelect={(file) => setFileData(file)}></FileUploaded>
         </div>
       <h1></h1>
 
 
 
-        <button className="btn btn-primary"  style={{margin:"25px"}} type="submit" onClick={handleOnSubmit}>
+        <button className="btn btn-warning"  style={{margin:"25px"}} type="submit" onClick={handleOnSubmit}>
           Submit for verification 
         </button>
       </form>
       
     </div>
+    
+    </>
   );
 }
 

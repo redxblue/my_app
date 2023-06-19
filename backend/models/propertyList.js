@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const propertyList = new mongoose.Schema({
     owner:{
         type: String,
-        default:"0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
+        default:"0x0"
     },
     address:{
         type:String

@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito');
+.loader{
+    backdrop-filter: blur(6px);
+    position:fixed;
+    height:100%;
+    width:100%;    
+   
+}
+.loader-main{
+    position:relative;
+    padding-top:25%;
+    padding-left:25%;
+    padding-right:25%;
+   
+    justify-content: center;
+    display: flex;
+}
+.loader span {
+    font-size: 25px;
+    font-family: 'Nunito';
+    font-weight: 700;
+    animation: blur 3s linear infinite;
+    line-height: 20px;
+    transition: all 0.5s;
+    letter-spacing: 0.2em;
+    
+   }
+   
+   @keyframes blur {
+    0%, 90% {
+     filter: blur(0);
+    }
+   
+    50% {
+     filter: blur(10px);
+    }
+   }

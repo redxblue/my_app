@@ -1,5 +1,6 @@
 /////////////////////////////used to get account type from database////////////
 const getUserInfo=async(account)=>{
+  console.log(`Wallet from get user function: ${account}`)
 const response = await fetch("http://localhost:5000/", {
         method: 'POST',
         headers: {
@@ -7,7 +8,7 @@ const response = await fetch("http://localhost:5000/", {
       },
         body: JSON.stringify({Wallet:account})   
     });
-    const json = await response.json() //returns property⭐metadata URI ⭐from IPFS
+    const json = await response.json() 
     console.log(json)
     return json
   }

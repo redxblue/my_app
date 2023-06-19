@@ -31,29 +31,32 @@ function LandInspector() {
     
   return (
     <div className='row'>
-      <h1 style={{backgroundColor: "#1750AC", color:"white",padding: "20px",}}>Welcome Mr.LandInspector</h1>
-      <h2 style={{backgroundColor: "grey", color:"white",padding: "10px",fontSize:"15px"}}>Requests awaiting verification...</h2>
+      <h1 style={{ color:"white",padding: "20px",textShadow:"2px 2px 10px #252525"}}>Inspector dashboard</h1>
+      <h2 style={{ color:"white",padding: "12px",fontSize:"15px",marginLeft:"10px",textShadow:"2px 2px 3px #252525"}}>
+        Requests awaiting verification...</h2>
       {data.map((obj) => {
         return (
           
           
            <div className="col">
-            <div className="card"  style={{ width: "",height:"94vh" }}>
+            <div className="card"  style={{ width: "",height:"auto" }}>
                 <img className="card-img-top" src={obj.img} alt="Card cap" />
                 <div className="card-body">
-                <strong className='card-text'>  {obj.price} ETH </strong>
+                <strong className='card-text'>Price : {obj.price} ETH </strong>
+                  <br></br>
+                  <strong className='card-text'> Security Deposit : {obj.securityDeposit} ETH </strong>
                   <p className='card-text'> <strong>{obj.facilities.beds}</strong> beds |
                   <strong>{obj.facilities.bathrooms} </strong>bathrooms 
                   </p>
                
-                  <p className="card-text" style={{fontWeight:"400"}}>{obj.address}</p>           {/*`Price:${obj.price}` */}
+                  <p className="card-text" style={{fontWeight:"400"}}>{obj.address},{obj.state}</p>           {/*`Price:${obj.price}` */}
                 <p></p>
                 <p className="card-title" style={{fontSize:"15px",fontWeight:"400"}}>
                   {obj.description}
                   </p>
                
                   <div class=" text-center" >
-                <button type="button" key={obj._id}className="btn btn-success my-3" onClick={()=>authenticateListing(obj._id)}>Authenticate listing</button>
+                <button type="button" key={obj._id}className="btn btn-outline-success my-3" onClick={()=>authenticateListing(obj._id)}>Authenticate listing</button>
                </div>
                 </div>
                 </div>
